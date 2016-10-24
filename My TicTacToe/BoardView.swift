@@ -34,23 +34,30 @@ class BoardView: UIView {
         
         for y in 0..<yCount {
             let height = self.bounds.height/CGFloat(yCount)
-            let y = CGFloat(y) * height
+            print(y)
+            let yPosition = CGFloat(y) * height
             
             for x in 0..<xCount {
                 let width = self.bounds.width/CGFloat(xCount)
-                
-                let x = CGFloat(x) * width
-                
-                let frame = CGRect(x: x, y: y, width: width, height: width)
-                
+                let xPosition = CGFloat(x) * width
+                let frame = CGRect(x: xPosition, y: yPosition, width: width, height: width)
                 let squareView = UIView(frame: frame)
-                squareView.backgroundColor = UIColor.red
                 squareView.layer.borderWidth = 1
                 self.addSubview(squareView)
-                
+                if let tag = Int("\(x)\(y)") {
+                    squareView.tag = tag
+                    
+                }
+                let tap = UITapGestureRecognizer(target: self, action: #selector(didTap))
+                squareView.addGestureRecognizer(tap)
                 print("Hello")
             }
         }
+    }
+    
+    func didTap(tap: UITapGestureRecognizer) {
+        print("Tapped")
+        print(tap.view?.tag)
     }
     
 }
