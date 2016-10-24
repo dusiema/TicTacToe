@@ -12,7 +12,16 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        let width = view.bounds.width - 10
+        let frame = CGRect(x: 0, y: 0, width: width, height: width)
+        let boardView = BoardView(frame: frame)
+        boardView.center = view.center
+        boardView.backgroundColor = UIColor.clear
+        boardView.layer.borderWidth = 2
+        boardView.layer.borderColor = UIColor.black.cgColor
+        
+        view.addSubview(boardView)
     }
 
     override func didReceiveMemoryWarning() {
