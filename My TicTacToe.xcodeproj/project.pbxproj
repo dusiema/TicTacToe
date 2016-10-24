@@ -13,6 +13,8 @@
 		698B6E401DBE7DBE00BA07A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 698B6E3F1DBE7DBE00BA07A8 /* Assets.xcassets */; };
 		698B6E431DBE7DBE00BA07A8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 698B6E411DBE7DBE00BA07A8 /* LaunchScreen.storyboard */; };
 		698B6E4B1DBE7DDE00BA07A8 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698B6E4A1DBE7DDE00BA07A8 /* BoardView.swift */; };
+		69BD3AE61DBE99BE00F6DBF1 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BD3AE51DBE99BE00F6DBF1 /* Board.swift */; };
+		69BD3AE81DBE9A4C00F6DBF1 /* FieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BD3AE71DBE9A4C00F6DBF1 /* FieldView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		698B6E421DBE7DBE00BA07A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		698B6E441DBE7DBE00BA07A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		698B6E4A1DBE7DDE00BA07A8 /* BoardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
+		69BD3AE51DBE99BE00F6DBF1 /* Board.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
+		69BD3AE71DBE9A4C00F6DBF1 /* FieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +60,41 @@
 		698B6E371DBE7DBE00BA07A8 /* My TicTacToe */ = {
 			isa = PBXGroup;
 			children = (
+				69BD3AE41DBE99A700F6DBF1 /* Controller */,
+				69BD3AE31DBE999F00F6DBF1 /* Model */,
+				69BD3AE21DBE999A00F6DBF1 /* View */,
 				698B6E381DBE7DBE00BA07A8 /* AppDelegate.swift */,
-				698B6E3A1DBE7DBE00BA07A8 /* ViewController.swift */,
-				698B6E4A1DBE7DDE00BA07A8 /* BoardView.swift */,
 				698B6E3C1DBE7DBE00BA07A8 /* Main.storyboard */,
 				698B6E3F1DBE7DBE00BA07A8 /* Assets.xcassets */,
 				698B6E411DBE7DBE00BA07A8 /* LaunchScreen.storyboard */,
 				698B6E441DBE7DBE00BA07A8 /* Info.plist */,
 			);
 			path = "My TicTacToe";
+			sourceTree = "<group>";
+		};
+		69BD3AE21DBE999A00F6DBF1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				698B6E4A1DBE7DDE00BA07A8 /* BoardView.swift */,
+				69BD3AE71DBE9A4C00F6DBF1 /* FieldView.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		69BD3AE31DBE999F00F6DBF1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				69BD3AE51DBE99BE00F6DBF1 /* Board.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		69BD3AE41DBE99A700F6DBF1 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				698B6E3A1DBE7DBE00BA07A8 /* ViewController.swift */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,7 +172,9 @@
 			files = (
 				698B6E4B1DBE7DDE00BA07A8 /* BoardView.swift in Sources */,
 				698B6E3B1DBE7DBE00BA07A8 /* ViewController.swift in Sources */,
+				69BD3AE61DBE99BE00F6DBF1 /* Board.swift in Sources */,
 				698B6E391DBE7DBE00BA07A8 /* AppDelegate.swift in Sources */,
+				69BD3AE81DBE9A4C00F6DBF1 /* FieldView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,6 +336,7 @@
 				698B6E491DBE7DBE00BA07A8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

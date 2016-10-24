@@ -9,55 +9,58 @@
 import Foundation
 import UIKit
 
+protocol BoardViewDelegate {
+    func tappedPosition(x: Int, y: Int)
+}
+
 class BoardView: UIView {
     
+    let verticalCount: Int = 3
+    let horizontalCount: Int = 3
     
-    let verticalCount: CGFloat = 3.0
-    let horizontalCount: CGFloat = 3.0
+    var delegate: BoardViewDelegate?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         createSquares(verticalCount: verticalCount, horizontalCount: horizontalCount)
-        
     }
     
-    func createSquares(verticalCount yCount: CGFloat, horizontalCount xCount: CGFloat) {
-        
-        let yCount = Int(yCount)
-        let xCount = Int(xCount)
-        
+    func createSquares(verticalCount yCount: Int, horizontalCount xCount: Int) {
         for y in 0..<yCount {
             let height = self.bounds.height/CGFloat(yCount)
-            print(y)
             let yPosition = CGFloat(y) * height
             
             for x in 0..<xCount {
                 let width = self.bounds.width/CGFloat(xCount)
                 let xPosition = CGFloat(x) * width
+                
+                //SquareView Setup
                 let frame = CGRect(x: xPosition, y: yPosition, width: width, height: width)
-                let squareView = UIView(frame: frame)
+                let squareView = FieldView(frame: frame)
                 squareView.layer.borderWidth = 1
                 self.addSubview(squareView)
-                if let tag = Int("\(x)\(y)") {
-                    squareView.tag = tag
-                    
-                }
+                
+                //Save the Position for the view
+                squareView.xPosition = x
+                squareView.yPosition = y
+                
+                //UITapGestureRecognizer Setup
                 let tap = UITapGestureRecognizer(target: self, action: #selector(didTap))
                 squareView.addGestureRecognizer(tap)
-                print("Hello")
             }
         }
     }
     
     func didTap(tap: UITapGestureRecognizer) {
-        print("Tapped")
-        print(tap.view?.tag)
+        if let fieldView = tap.view as? FieldView {
+            let xPosition = fieldView.xPosition!
+            let yPosition = fieldView.yPosition!
+            print("tapped field at: \(xPosition), \(yPosition)")
+            delegate?.tappedPosition(x: xPosition, y: yPosition)
+        }
     }
-    
 }
