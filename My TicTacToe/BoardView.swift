@@ -48,21 +48,21 @@ class BoardView: UIView {
                 
                 //SquareView Setup
                 let frame = CGRect(x: xPosition, y: yPosition, width: width, height: width)
+                print(frame)
                 let squareView = FieldView(frame: frame)
                 squareView.layer.borderWidth = 1
                 self.addSubview(squareView)
                 
                 //Add the Label
                 let label = UILabel(frame: frame)
-                print(frame)
+                label.center = squareView.center
+                print("\(x),\(y)")
                 label.textAlignment = .center
                 label.font = label.font.withSize(40)
                 label.text = "❌"
-                label.center = squareView.center
-                print("Hello")
-                squareView.addSubview(label)
                 
-                //"
+                self.addSubview(label)
+                
                 //Save the Position for the view
                 squareView.xPosition = x
                 squareView.yPosition = y

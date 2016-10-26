@@ -37,8 +37,8 @@ class ViewController: UIViewController, BoardViewDelegate {
     
     func tappedPosition(x: Int, y: Int) {
         board.didTap(xPosition: x, yPosition: y)
-        
-        turnLabel.text = board.nextPlayer() == .cross ? "❌" : "⭕"
+        turnLabel.text = board.turn == .circle ? "❌" : "⭕"
+
     }
     
 }
