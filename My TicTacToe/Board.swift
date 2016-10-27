@@ -33,12 +33,14 @@ class Board {
         board = yArray
     }
     
-    func didTap(xPosition x: Int, yPosition y: Int) {
+    func didTap(xPosition x: Int, yPosition y: Int) -> Bool {
         if !spotIsTaken(xPosition: x, yPosition: y) && !boardIsFull() {
             board[y][x] = nextPlayer()
             didWin()
+            return true
         } else {
             print("Board is Full or Spot is taken")
+            return false
         }
     }
     
@@ -68,23 +70,27 @@ class Board {
         return turn
     }
     
-    func didWin() {
-        winVerticalHorizontal()
-        winDiagonalPositive()
-        winDiagonalNegative()
+    func didWin() -> Bool {
+        if winVertical() || winDiagonalPositive() || winDiagonalNegative() || winHorizontal() {
+            print("Fuckin Won")
+            return true
+        } else {
+            print("Fuckin Lost")
+            return false
+        }
     }
     
-    func winDiagonalPositive() {
+    func winDiagonalPositive() -> Bool {
         var array: [Field] = []
         for i in 0..<board.count {
             let place = board[i][i]
             array.append(place)
         }
         
-        checkIfWinArray(array: array)
+        return checkIfWinArray(array: array)
     }
     
-    func winDiagonalNegative() {
+    func winDiagonalNegative() -> Bool {
         var array: [Field] = []
         var count = 0
         for i in stride(from: board.count-1, through: 0, by: -1) {
@@ -92,30 +98,46 @@ class Board {
             count += 1
             array.append(place)
         }
-        checkIfWinArray(array: array)
+        return checkIfWinArray(array: array)
     }
     
-    func winVerticalHorizontal() {
+    func winHorizontal() -> Bool {
+        for y in 0..<board.count {
+            if checkIfWinArray(array: board[y]) {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func winVertical() -> Bool {
         for y in 0..<board.count {
             var array: [Field] = []
             for x in 0..<board.count {
                 array.append(board[x][y])
             }
-            checkIfWinArray(array: array)
-            checkIfWinArray(array: board[y])
+            if checkIfWinArray(array: array) {
+                return true
+            }
         }
+        return false
     }
     
-    func checkIfWinArray(array: [Field]) {
+    func checkIfWinArray(array: [Field]) -> Bool {
         if !array.isEmpty {
             if !array.contains(.empty) {
                 if !array.contains(.cross) {
                     print("Circle Wins!")
+                    return true
                 } else if !array.contains(.circle) {
                     print("Cross Wins!")
+                    return true
+                } else {
+                    return false
                 }
             }
         }
+        return false
     }
     
     enum Field {

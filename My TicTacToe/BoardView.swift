@@ -20,6 +20,8 @@ class BoardView: UIView {
     
     var delegate: BoardViewDelegate?
     
+    var squareViews: [FieldView] = []
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
@@ -53,16 +55,6 @@ class BoardView: UIView {
                 squareView.layer.borderWidth = 1
                 self.addSubview(squareView)
                 
-                //Add the Label
-                let label = UILabel(frame: frame)
-                label.center = squareView.center
-                print("\(x),\(y)")
-                label.textAlignment = .center
-                label.font = label.font.withSize(40)
-                label.text = "❌"
-                
-                self.addSubview(label)
-                
                 //Save the Position for the view
                 squareView.xPosition = x
                 squareView.yPosition = y
@@ -71,15 +63,26 @@ class BoardView: UIView {
                 let tap = UITapGestureRecognizer(target: self, action: #selector(didTap))
                 squareView.addGestureRecognizer(tap)
                 
+                squareViews.append(squareView)
             }
         }
     }
+    
+    func updateFieldAtPosition(xPosition: Int, yPostion: Int, turn: String) {
+        for view in squareViews {
+            if view.xPosition == xPosition && view.yPosition == yPostion {
+                view.label?.text = turn
+            }
+        }
+    }
+
     
     func didTap(tap: UITapGestureRecognizer) {
         if let fieldView = tap.view as? FieldView {
             let xPosition = fieldView.xPosition!
             let yPosition = fieldView.yPosition!
 //            print("tapped field at: \(xPosition), \(yPosition)")
+            
             delegate?.tappedPosition(x: xPosition, y: yPosition)
         }
     }
