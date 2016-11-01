@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,20 +20,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⭕" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tMr-gl-H96">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="42" id="xrp-dt-bW5"/>
-                                </constraints>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blackBoardBackground" translatesAutoresizingMaskIntoConstraints="NO" id="PSN-QM-KIe"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="⭕" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tMr-gl-H96">
+                                <frame key="frameInset" minX="317" minY="638" width="42" height="21"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="30"/>
                                 <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Turn:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hUz-Cl-zkD">
+                                <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TicTacToe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m2D-LJ-45b">
+                                <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="tMr-gl-H96" secondAttribute="bottom" constant="20" symbolic="YES" id="CAF-Er-9XZ"/>
-                            <constraint firstItem="tMr-gl-H96" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="CyX-1G-Wlf"/>
-                            <constraint firstItem="tMr-gl-H96" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="606" id="xqh-ls-4KX"/>
+                            <constraint firstItem="hUz-Cl-zkD" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="618" id="25e-ZV-nXk"/>
+                            <constraint firstItem="PSN-QM-KIe" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5eg-7n-wLg"/>
+                            <constraint firstItem="hUz-Cl-zkD" firstAttribute="trailing" secondItem="tMr-gl-H96" secondAttribute="trailing" id="Egm-oT-sEA"/>
+                            <constraint firstItem="PSN-QM-KIe" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="OOD-3x-HLb"/>
+                            <constraint firstItem="m2D-LJ-45b" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="R7z-Fw-me2"/>
+                            <constraint firstItem="m2D-LJ-45b" firstAttribute="trailing" secondItem="tMr-gl-H96" secondAttribute="trailing" id="SPo-aX-OFB"/>
+                            <constraint firstItem="hUz-Cl-zkD" firstAttribute="centerX" secondItem="PSN-QM-KIe" secondAttribute="centerX" id="Y9Y-a0-a3G"/>
+                            <constraint firstItem="PSN-QM-KIe" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="Yw6-iu-Kgw"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="hUz-Cl-zkD" secondAttribute="bottom" constant="8" symbolic="YES" id="aDU-Id-RRg"/>
+                            <constraint firstItem="hUz-Cl-zkD" firstAttribute="firstBaseline" secondItem="tMr-gl-H96" secondAttribute="firstBaseline" id="bOd-DR-4cw"/>
+                            <constraint firstItem="PSN-QM-KIe" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="cSs-Vy-uys"/>
+                            <constraint firstItem="hUz-Cl-zkD" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="hUQ-uJ-b19"/>
+                            <constraint firstItem="hUz-Cl-zkD" firstAttribute="bottom" secondItem="tMr-gl-H96" secondAttribute="bottom" id="jtm-xZ-A1R"/>
+                            <constraint firstItem="m2D-LJ-45b" firstAttribute="leading" secondItem="hUz-Cl-zkD" secondAttribute="leading" id="l77-SB-Yyx"/>
                         </constraints>
                     </view>
                     <connections>
@@ -41,6 +62,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="32.799999999999997" y="37.331334332833585"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="blackBoardBackground" width="375" height="667"/>
+    </resources>
 </document>

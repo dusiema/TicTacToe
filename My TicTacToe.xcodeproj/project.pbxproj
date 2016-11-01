@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		69532CCD1DC3C81100688D41 /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69532CCC1DC3C81100688D41 /* GameOverView.swift */; };
 		698B6E391DBE7DBE00BA07A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698B6E381DBE7DBE00BA07A8 /* AppDelegate.swift */; };
 		698B6E3B1DBE7DBE00BA07A8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698B6E3A1DBE7DBE00BA07A8 /* ViewController.swift */; };
 		698B6E3E1DBE7DBE00BA07A8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 698B6E3C1DBE7DBE00BA07A8 /* Main.storyboard */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		69532CCC1DC3C81100688D41 /* GameOverView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
 		698B6E351DBE7DBE00BA07A8 /* My TicTacToe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "My TicTacToe.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		698B6E381DBE7DBE00BA07A8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		698B6E3A1DBE7DBE00BA07A8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; usesTabs = 0; };
@@ -76,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				698B6E4A1DBE7DDE00BA07A8 /* BoardView.swift */,
+				69532CCC1DC3C81100688D41 /* GameOverView.swift */,
 				69BD3AE71DBE9A4C00F6DBF1 /* FieldView.swift */,
 			);
 			name = View;
@@ -174,6 +177,7 @@
 				698B6E3B1DBE7DBE00BA07A8 /* ViewController.swift in Sources */,
 				69BD3AE61DBE99BE00F6DBF1 /* Board.swift in Sources */,
 				698B6E391DBE7DBE00BA07A8 /* AppDelegate.swift in Sources */,
+				69532CCD1DC3C81100688D41 /* GameOverView.swift in Sources */,
 				69BD3AE81DBE9A4C00F6DBF1 /* FieldView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

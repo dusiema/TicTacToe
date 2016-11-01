@@ -15,10 +15,12 @@ class ViewController: UIViewController, BoardViewDelegate {
 //    var boardView = BoardView()
     let board = Board()
     var boardView: BoardView? = nil
+    var gameOver: GameOverView? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpBoard()
+        gameOverView()
     }
     
     func setUpBoard() {
@@ -29,6 +31,13 @@ class ViewController: UIViewController, BoardViewDelegate {
         view.addSubview(self.boardView!)
         self.boardView?.delegate = self
     }
+    
+    func gameOverView() {
+        let frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
+        self.gameOver = GameOverView(frame: frame)
+        gameOver?.isHidden = true
+        view.addSubview(self.gameOver!)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -36,10 +45,14 @@ class ViewController: UIViewController, BoardViewDelegate {
     }
     
     func tappedPosition(x: Int, y: Int) {
-        if board.didTap(xPosition: x, yPosition: y) && board.didWin() {
+        if board.didTap(xPosition: x, yPosition: y) {
             turnLabel.text = board.turn == .circle ? "❌" : "⭕"
             let turn = board.turn == .circle ? "⭕" : "❌"
             boardView?.updateFieldAtPosition(xPosition: x, yPostion: y, turn: turn)
+        } else {
+            gameOver?.isHidden = false
+            boardView?.clear()
+            board.clear()
         }
     }
 }

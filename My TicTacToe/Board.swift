@@ -34,7 +34,7 @@ class Board {
     }
     
     func didTap(xPosition x: Int, yPosition y: Int) -> Bool {
-        if !spotIsTaken(xPosition: x, yPosition: y) && !boardIsFull() {
+        if !spotIsTaken(xPosition: x, yPosition: y) && !boardIsFull() && !didWin() {
             board[y][x] = nextPlayer()
             didWin()
             return true
@@ -72,10 +72,10 @@ class Board {
     
     func didWin() -> Bool {
         if winVertical() || winDiagonalPositive() || winDiagonalNegative() || winHorizontal() {
-            print("Fuckin Won")
+            print("Won")
             return true
         } else {
-            print("Fuckin Lost")
+            print("Lost")
             return false
         }
     }
@@ -138,6 +138,11 @@ class Board {
             }
         }
         return false
+    }
+    
+    func clear() {
+        createBoard(xCount: 3, yCount: 3)
+        print("Cleared")
     }
     
     enum Field {

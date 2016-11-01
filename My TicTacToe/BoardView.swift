@@ -36,7 +36,7 @@ class BoardView: UIView {
     func viewSetUp() {
         self.backgroundColor = UIColor.clear
         self.layer.borderWidth = 2
-        self.layer.borderColor = UIColor.black.cgColor
+        self.layer.borderColor = UIColor.white.cgColor
     }
     
     func createSquares(verticalCount yCount: Int, horizontalCount xCount: Int) {
@@ -52,7 +52,8 @@ class BoardView: UIView {
                 let frame = CGRect(x: xPosition, y: yPosition, width: width, height: width)
                 print(frame)
                 let squareView = FieldView(frame: frame)
-                squareView.layer.borderWidth = 1
+                squareView.layer.borderWidth = 2
+                squareView.layer.borderColor = UIColor.white.cgColor
                 self.addSubview(squareView)
                 
                 //Save the Position for the view
@@ -75,14 +76,18 @@ class BoardView: UIView {
             }
         }
     }
+    
+    func clear() {
+        for view in squareViews {
+            view.label?.text = ""
+        }
+    }
 
     
     func didTap(tap: UITapGestureRecognizer) {
         if let fieldView = tap.view as? FieldView {
             let xPosition = fieldView.xPosition!
             let yPosition = fieldView.yPosition!
-//            print("tapped field at: \(xPosition), \(yPosition)")
-            
             delegate?.tappedPosition(x: xPosition, y: yPosition)
         }
     }
