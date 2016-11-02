@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SnapKit
 
 class GameOverView: UIView {
     
@@ -24,39 +25,61 @@ class GameOverView: UIView {
     
     func createView() {
         
+        let width = self.bounds.width
+        let height = self.bounds.height
+        
         //Create GameOver View:
         let view = UIImageView(frame: frame)
         view.image = UIImage(named: "blackBoardBackground.png")
         view.isUserInteractionEnabled = true
         self.addSubview(view)
         
+        //Create GameOver Label:
+        let gameOverLabel = createLabel(name: "Game Over", textSize: 50, borderWidth: 0)
+        view.addSubview(gameOverLabel)
+        gameOverLabel.snp.makeConstraints { (make) -> Void in
+            make.edges.equalTo(view).inset(UIEdgeInsetsMake(0, 20, height*0.75, 20))
+        }
         
-        let labelViewFrame = CGRect(x: self.bounds.width*0.5, y: 0, width: self.bounds.width * 0.75, height: self.bounds.height * 0.2)
-        let labelView = UILabel(frame: labelViewFrame)
-        labelView.text = "Game Over"
-        labelView.font = labelView.font.withSize(40)
-        labelView.textColor = UIColor.white
-        view.addSubview(labelView)
-        labelView.center = CGPoint.init(x: self.bounds.width*0.5, y: 30)
-//        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[myView(>=748)]-|", options: .directionLeadingToTrailing, metrics: nil, views: NSDictionaryOfVariableBindings(labelView)))
+        //Create Win|Lose|Tie Label:
+        let winnerLabel = createLabel(name: "The Winner is: ", textSize: 30, borderWidth: 0)
+        view.addSubview(winnerLabel)
+        winnerLabel.snp.makeConstraints { (make) -> Void in
+            make.edges.equalTo(view).inset(UIEdgeInsetsMake(height*0.25, 20, height*0.5, 20))
+        }
         
-        let restartViewFrame = CGRect(x: self.bounds.width*0.5, y: 0, width: self.bounds.width * 0.75, height: self.bounds.height * 0.2)
-        let restartView = UILabel(frame: restartViewFrame)
-        restartView.isUserInteractionEnabled = true
-        restartView.text = "Reset"
-        restartView.font = restartView.font.withSize(40)
-        restartView.textColor = UIColor.red
+        //Create Rematch, Menu & Settings Buttons:
+        let restartView = createLabel(name: "Rematch", textSize: 40, borderWidth: 3)
         view.addSubview(restartView)
-        restartView.center = CGPoint.init(x: self.bounds.width*0.5, y: self.bounds.width*0.9)
+        restartView.snp.makeConstraints { (make) -> Void in
+            make.edges.equalTo(view).inset(UIEdgeInsetsMake(height*0.5, width*0.25, 300, width*0.25))
+        }
+        
+        
         
         //UITapGestureRecognizer Setup
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTapRestart))
         restartView.addGestureRecognizer(tap)
     }
     
+    
+    //Create Label Function:
+    func createLabel(name: String, textSize: CGFloat, borderWidth: CGFloat) -> UILabel {
+        let label = UILabel()
+        label.isUserInteractionEnabled = true
+        label.text = name
+        label.font = UIFont(name: "Chalkduster", size: textSize)
+        label.textColor = UIColor.white
+        label.layer.cornerRadius = 8
+        label.layer.borderWidth = borderWidth
+        label.textAlignment = .center
+        label.layer.borderColor = UIColor.white.cgColor
+        
+        return label
+    }
+    
+    //Rematch Label was tapped:
     func didTapRestart() {
         self.isHidden = true
     }
-    
-    
 }
