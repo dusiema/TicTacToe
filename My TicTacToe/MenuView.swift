@@ -1,22 +1,22 @@
 //
-//  GameOverView.swift
+//  MenuView.swift
 //  My TicTacToe
 //
-//  Created by Jay on 10/28/16.
+//  Created by Jay on 11/2/16.
 //  Copyright © 2016 Juan Pablo. All rights reserved.
 //
 
-import Foundation
 import UIKit
-import SnapKit
 
-protocol GameOverDelegate {
-    func didTapMenu(didTap: Bool)
+protocol MenuViewDelegate {
+    func didTapPlay(didTap: Bool)
+    func didTapMultiplayer(didTap: Bool)
 }
 
-class GameOverView: UIView {
+class MenuView: UIView {
+
     
-    var delegate: GameOverDelegate?
+    var delegate: MenuViewDelegate?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -40,17 +40,10 @@ class GameOverView: UIView {
         self.addSubview(view)
         
         //Create GameOver Label:
-        let gameOverLabel = createLabel(name: "Game Over", textSize: 50, borderWidth: 0)
+        let gameOverLabel = createLabel(name: "Tic Tac Toe", textSize: 50, borderWidth: 0)
         view.addSubview(gameOverLabel)
         gameOverLabel.snp.makeConstraints { (make) -> Void in
             make.edges.equalTo(view).inset(UIEdgeInsetsMake(0, 20, height*0.75, 20))
-        }
-        
-        //Create Win||Tie Label:
-        let winnerLabel = createLabel(name: "The Winner is: ", textSize: 30, borderWidth: 0)
-        view.addSubview(winnerLabel)
-        winnerLabel.snp.makeConstraints { (make) -> Void in
-            make.edges.equalTo(view).inset(UIEdgeInsetsMake(height*0.25, 20, height*0.5, 20))
         }
         
         //Create Buttons:
@@ -65,7 +58,7 @@ class GameOverView: UIView {
         }
         
         //Create Menu Button:
-        let menuLabel = createButton(name: "Menu", textSize: 40, borderWidth: 3)
+        let menuLabel = createButton(name: "Multiplayer", textSize: 40, borderWidth: 3)
         view.addSubview(menuLabel)
         menuLabel.snp.makeConstraints { (make) -> Void in
             make.bottom.equalTo(settingsLabel.snp.top).offset(-20)
@@ -75,7 +68,7 @@ class GameOverView: UIView {
         }
         
         //Create Rematch Button:
-        let restartLabel = createButton(name: "Rematch", textSize: 30, borderWidth: 3)
+        let restartLabel = createButton(name: "Play", textSize: 30, borderWidth: 3)
         view.addSubview(restartLabel)
         restartLabel.addTarget(self, action: #selector(GameOverView.didTapRestart), for: .touchUpInside)
         restartLabel.snp.makeConstraints { (make) -> Void in
@@ -85,13 +78,14 @@ class GameOverView: UIView {
             make.centerX.equalTo(self.snp.centerX)
         }
         
-        //Rematch UITapGestureRecognizer Setup
-        let tapRematch = UITapGestureRecognizer(target: self, action: #selector(didTapRestart))
-        restartLabel.addGestureRecognizer(tapRematch)
+        //Play UITapGestureRecognizer Setup
+        let tapPlay = UITapGestureRecognizer(target: self, action: #selector(didTapPlay))
+        restartLabel.addGestureRecognizer(tapPlay)
         
-        //Menu UITapGestureRecognizer Setup
-        let tapMenu = UITapGestureRecognizer(target: self, action: #selector(didTapMenu))
-        menuLabel.addGestureRecognizer(tapMenu)
+        //Multiplayer UITapGestureRecognizer Setup
+        let tapMultiplayer = UITapGestureRecognizer(target: self, action: #selector(didTapMultiplayer))
+        menuLabel.addGestureRecognizer(tapMultiplayer)
+
     }
     
     
@@ -123,28 +117,14 @@ class GameOverView: UIView {
         return button
     }
     
-    //Rematch Label was tapped:
-    func didTapRestart() {
-        self.isHidden = true
+    //Play Label was tapped:
+    func didTapPlay() {
+        self.delegate?.didTapPlay(didTap: true)
     }
     
-    //Menu Label was tapped:
-    func didTapMenu() {
-        delegate?.didTapMenu(didTap: true)
+    //Multiplayer Label was tapped:
+    func didTapMultiplayer() {
+        self.delegate?.didTapMultiplayer(didTap: true)
     }
     
-}
-
-//Use UIColor as a UIImage Background:
-extension UIImage {
-    static func fromColor(color: UIColor) -> UIImage {
-        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
-        UIGraphicsBeginImageContext(rect.size)
-        let context = UIGraphicsGetCurrentContext()
-        context!.setFillColor(color.cgColor)
-        context!.fill(rect)
-        let img = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return img!
-    }
 }

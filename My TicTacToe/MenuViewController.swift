@@ -8,17 +8,34 @@
 
 import UIKit
 
-class MenuViewController: UIViewController {
+class MenuViewController: UIViewController, MenuViewDelegate {
+    
+    var menuView: MenuView? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        viewSetUp()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-
+    
+    func viewSetUp() {
+        self.menuView = MenuView(frame: view.frame)
+        menuView?.delegate = self
+        view.addSubview(menuView!)
+    }
+    
+    func didTapPlay(didTap: Bool) {
+        if didTap {
+            present(BoardViewController(), animated: true, completion: nil)
+        }
+    }
+    
+    func didTapMultiplayer(didTap: Bool) {
+        if didTap {
+            print("Multiplayer")
+        }
+    }
 }
