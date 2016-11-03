@@ -17,9 +17,6 @@ class FieldView: UIView {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setUpLabel()
-        
-        
     }
     
     override init(frame: CGRect) {
@@ -27,6 +24,7 @@ class FieldView: UIView {
         setUpLabel()
     }
     
+    //Setup the label for the Board View:
     func setUpLabel() {
         let frame = CGRect(x: 0, y: 0, width: self.bounds.width, height: self.bounds.height)
         label = UILabel(frame: frame)
@@ -34,7 +32,6 @@ class FieldView: UIView {
         label?.font = label?.font.withSize(40)
         label?.text = ""
         self.addSubview(label!)
-
     }
     
 }

@@ -8,11 +8,10 @@
 
 import UIKit
 
-class ViewController: UIViewController, BoardViewDelegate {
+class BoardViewController: UIViewController, BoardViewDelegate {
     
     @IBOutlet weak var turnLabel: UILabel!
     
-//    var boardView = BoardView()
     let board = Board()
     var boardView: BoardView? = nil
     var gameOver: GameOverView? = nil
@@ -23,6 +22,11 @@ class ViewController: UIViewController, BoardViewDelegate {
         gameOverView()
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    //Setup the Board View:
     func setUpBoard() {
         let width = view.bounds.width - 10
         let frame = CGRect(x: 0, y: 0, width: width, height: width)
@@ -32,28 +36,45 @@ class ViewController: UIViewController, BoardViewDelegate {
         self.boardView?.delegate = self
     }
     
+    //Setup the GameOver View:
     func gameOverView() {
         let frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
         self.gameOver = GameOverView(frame: frame)
         gameOver?.isHidden = true
         view.addSubview(self.gameOver!)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
+    //User tapped an area on the Board View:
     func tappedPosition(x: Int, y: Int) {
-        if board.didTap(xPosition: x, yPosition: y) {
+        let state = board.didTap(xPosition: x, yPosition: y)
+        
+        switch state {
+        case .lost:
             turnLabel.text = board.turn == .circle ? "❌" : "⭕"
             let turn = board.turn == .circle ? "⭕" : "❌"
             boardView?.updateFieldAtPosition(xPosition: x, yPostion: y, turn: turn)
-        } else {
+        case .win:
             gameOver?.isHidden = false
             boardView?.clear()
             board.clear()
+            print("\(turnLabel.text!) Won!")
+        case .full:
+            gameOver?.isHidden = false
+            boardView?.clear()
+            board.clear()
+            print("Full")
+        case .taken:
+            print("Taken")
         }
+//        if board.didTap(xPosition: x, yPosition: y) == .lost {
+//            turnLabel.text = board.turn == .circle ? "❌" : "⭕"
+//            let turn = board.turn == .circle ? "⭕" : "❌"
+//            boardView?.updateFieldAtPosition(xPosition: x, yPostion: y, turn: turn)
+//        } else{
+//            gameOver?.isHidden = false
+//            boardView?.clear()
+//            board.clear()
+//        }
     }
 }
 

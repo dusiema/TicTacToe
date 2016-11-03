@@ -20,6 +20,7 @@ class Board {
         createBoard(xCount: 3, yCount: 3)
     }
     
+    //Create the Board Model:
     func createBoard(xCount: Int, yCount: Int) {
         var xArray: [Field] = []
         var yArray: [[Field]] = []
@@ -33,17 +34,32 @@ class Board {
         board = yArray
     }
     
-    func didTap(xPosition x: Int, yPosition y: Int) -> Bool {
+    //User tapped on a given area of the Board:
+    func didTap(xPosition x: Int, yPosition y: Int) -> gameState {
         if !spotIsTaken(xPosition: x, yPosition: y) && !boardIsFull() && !didWin() {
             board[y][x] = nextPlayer()
-            didWin()
-            return true
+            if didWin() {
+                return .win
+            } else if boardIsFull(){
+                return .full
+            } else {
+                return .lost
+            }
+            
         } else {
-            print("Board is Full or Spot is taken")
-            return false
+            if spotIsTaken(xPosition: x, yPosition: y) {
+                return .taken
+            } else if boardIsFull() {
+                return .full
+            } else if didWin() {
+                return .win
+            } else {
+                return .win
+            }
         }
     }
     
+    //Returns true if the Board is full:
     func boardIsFull() -> Bool {
         var count = 0
         for i in 0..<board.count {
@@ -56,6 +72,7 @@ class Board {
         }
     }
     
+    //Returns true if the spot that was tapped is taken:
     func spotIsTaken(xPosition x: Int, yPosition y: Int) -> Bool {
         if board[y][x] != Field.empty {
             return true
@@ -64,32 +81,32 @@ class Board {
         }
     }
     
+    //Returns the next turn:
     func nextPlayer() -> Field {
         turn = turn == Field.cross ? Field.circle : Field.cross
-        print(turn)
         return turn
     }
     
+    //Returns true if a player won:
     func didWin() -> Bool {
         if winVertical() || winDiagonalPositive() || winDiagonalNegative() || winHorizontal() {
-            print("Won")
             return true
         } else {
-            print("Lost")
             return false
         }
     }
     
+    //Returns true if a player won in a Positive Slope direction:
     func winDiagonalPositive() -> Bool {
         var array: [Field] = []
         for i in 0..<board.count {
             let place = board[i][i]
             array.append(place)
         }
-        
         return checkIfWinArray(array: array)
     }
     
+    //Returns true if a player won in a Negative Slope direction:
     func winDiagonalNegative() -> Bool {
         var array: [Field] = []
         var count = 0
@@ -101,6 +118,7 @@ class Board {
         return checkIfWinArray(array: array)
     }
     
+    //Returns true if a player won in a horizontal direction:
     func winHorizontal() -> Bool {
         for y in 0..<board.count {
             if checkIfWinArray(array: board[y]) {
@@ -110,6 +128,7 @@ class Board {
         return false
     }
     
+    //Returns true if a player won in a vertical direction:
     func winVertical() -> Bool {
         for y in 0..<board.count {
             var array: [Field] = []
@@ -123,14 +142,13 @@ class Board {
         return false
     }
     
+    //Returns true if there is a winning hand on the board:
     func checkIfWinArray(array: [Field]) -> Bool {
         if !array.isEmpty {
             if !array.contains(.empty) {
                 if !array.contains(.cross) {
-                    print("Circle Wins!")
                     return true
                 } else if !array.contains(.circle) {
-                    print("Cross Wins!")
                     return true
                 } else {
                     return false
@@ -140,9 +158,9 @@ class Board {
         return false
     }
     
+    //Clear the Board Model:
     func clear() {
         createBoard(xCount: 3, yCount: 3)
-        print("Cleared")
     }
     
     enum Field {
@@ -150,4 +168,11 @@ class Board {
         case circle
         case empty
     }
+}
+
+enum gameState {
+    case win
+    case lost
+    case full
+    case taken
 }

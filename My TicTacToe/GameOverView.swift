@@ -47,17 +47,28 @@ class GameOverView: UIView {
             make.edges.equalTo(view).inset(UIEdgeInsetsMake(height*0.25, 20, height*0.5, 20))
         }
         
-        //Create Menu Label:
-        let menuLabel = createButton(name: "Menu", textSize: 40, borderWidth: 3)
-        view.addSubview(menuLabel)
-        menuLabel.snp.makeConstraints { (make) -> Void in
+        //Create Buttons:
+        //Create Settings Button:
+        let settingsLabel = createButton(name: "Settings", textSize: 40, borderWidth: 3)
+        view.addSubview(settingsLabel)
+        settingsLabel.snp.makeConstraints { (make) -> Void in
             make.bottom.equalTo(self.snp.bottom).offset(-20)
             make.width.equalTo(215)
             make.height.equalTo(60)
             make.centerX.equalTo(self.snp.centerX)
         }
         
-        //Create Rematch Label:
+        //Create Menu Button:
+        let menuLabel = createButton(name: "Menu", textSize: 40, borderWidth: 3)
+        view.addSubview(menuLabel)
+        menuLabel.snp.makeConstraints { (make) -> Void in
+            make.bottom.equalTo(settingsLabel.snp.top).offset(-20)
+            make.width.equalTo(settingsLabel.snp.width)
+            make.height.equalTo(settingsLabel.snp.height)
+            make.centerX.equalTo(self.snp.centerX)
+        }
+        
+        //Create Rematch Button:
         let restartLabel = createButton(name: "Rematch", textSize: 30, borderWidth: 3)
         view.addSubview(restartLabel)
         restartLabel.addTarget(self, action: #selector(GameOverView.didTapRestart), for: .touchUpInside)
@@ -77,7 +88,6 @@ class GameOverView: UIView {
     //Create Labels:
     func createLabel(name: String, textSize: CGFloat, borderWidth: CGFloat) -> UILabel {
         let label = UILabel()
-        label.isUserInteractionEnabled = true
         label.text = name
         label.font = UIFont(name: "Chalkduster", size: textSize)
         label.textColor = UIColor.white

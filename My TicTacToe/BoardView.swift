@@ -17,14 +17,11 @@ class BoardView: UIView {
     
     let verticalCount: Int = 3
     let horizontalCount: Int = 3
-    
     var delegate: BoardViewDelegate?
-    
     var squareViews: [FieldView] = []
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
     }
     
     override init(frame: CGRect) {
@@ -33,12 +30,14 @@ class BoardView: UIView {
         createSquares(verticalCount: verticalCount, horizontalCount: horizontalCount)
     }
     
+    //Setup the Board View:
     func viewSetUp() {
         self.backgroundColor = UIColor.clear
         self.layer.borderWidth = 2
         self.layer.borderColor = UIColor.white.cgColor
     }
     
+    //Populate the Board View:
     func createSquares(verticalCount yCount: Int, horizontalCount xCount: Int) {
         for y in 0..<yCount {
             let height = self.bounds.height/CGFloat(yCount)
@@ -50,7 +49,6 @@ class BoardView: UIView {
                 
                 //SquareView Setup
                 let frame = CGRect(x: xPosition, y: yPosition, width: width, height: width)
-                print(frame)
                 let squareView = FieldView(frame: frame)
                 squareView.layer.borderWidth = 2
                 squareView.layer.borderColor = UIColor.white.cgColor
@@ -69,6 +67,7 @@ class BoardView: UIView {
         }
     }
     
+    //Update the label when the user tapped on the given area:
     func updateFieldAtPosition(xPosition: Int, yPostion: Int, turn: String) {
         for view in squareViews {
             if view.xPosition == xPosition && view.yPosition == yPostion {
@@ -76,14 +75,15 @@ class BoardView: UIView {
             }
         }
     }
-    
+   
+    //Clear the Board's Labels:
     func clear() {
         for view in squareViews {
             view.label?.text = ""
         }
     }
 
-    
+    //User tapped on a given area of the Board:
     func didTap(tap: UITapGestureRecognizer) {
         if let fieldView = tap.view as? FieldView {
             let xPosition = fieldView.xPosition!
