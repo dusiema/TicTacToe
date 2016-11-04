@@ -58,6 +58,7 @@ class BoardViewController: UIViewController, BoardViewDelegate, GameOverDelegate
     func didTapMenu(didTap: Bool) {
         if didTap {
             self.present(MenuViewController(), animated: true, completion: nil)
+            gameOver?.isHidden = true
         }
     }
     

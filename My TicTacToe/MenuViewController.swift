@@ -29,7 +29,7 @@ class MenuViewController: UIViewController, MenuViewDelegate {
     
     func didTapPlay(didTap: Bool) {
         if didTap {
-            present(BoardViewController(), animated: true, completion: nil)
+            presentingViewController?.dismiss(animated: true, completion: nil)
         }
     }
     
